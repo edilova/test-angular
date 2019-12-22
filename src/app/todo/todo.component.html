@@ -1,0 +1,45 @@
+<div class="todo">
+  <div class="header">
+    <img src="https://a.trellocdn.com/prgb/dist/images/header-logo-2x.01ef898811a879595cea.png" alt="">
+  </div>
+  <div class="todo-content">
+    <div class="">
+      <!--<button><span>+</span>Добавить карточку</button>-->
+      <input class="card-wrapper"
+             placeholder="Добавить карточку"
+             [(ngModel)]="newTodo"
+             (keyup.enter)="addTodo()"
+             autofocus>
+      <div class="card-preview-wrapper">
+        <div class="card-preview" *ngFor="let todo of todos" [ngClass]="{completed: todo.isDone}">
+          <img src="./../../assets/image.jpeg" alt="" width="100%">
+          <div class="card-preview-text"  *ngIf="isShown !== todo.title">
+            <p (click)="toggleShow(todo.title)">{{todo.title}}</p>
+            <!--<input class="edit"-->
+                   <!--#updatedTodo-->
+                   <!--[value]="todo.title"-->
+                   <!--(blur)="updateTodo(todo, updatedTodo.value)"-->
+                   <!--(keyup.escape)="todo.editing = false">-->
+            <div class="card-buttons">
+              <img src='./../../assets/edit.svg' alt="" (click)="toggleShow(todo.title)">
+              <img src='./../../assets/delete.svg' alt="" (click)="destroyTodo(todo)">
+              <!--<button>Изменить</button>-->
+              <!--<button>Удалить</button>-->
+            </div>
+          </div>
+          <div class="card-preview-text" *ngIf="isShown === todo.title">
+            <input class="edit"
+                   #updatedTodo
+                   [value]="todo.title"
+                   (blur)="updateTodo(todo, updatedTodo.value)"
+                   (keyup.escape)="todo.editing = false"
+                   (keyup.enter)="updateTodo(todo, updatedTodo.value)">
+            <p (click)="updateTodo(todo, updatedTodo.value)">Изменить</p>
+            <!--<img src='./../../assets/edit.svg' alt="" (click)="updateTodo(todo, updatedTodo.value)" width="16">-->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
