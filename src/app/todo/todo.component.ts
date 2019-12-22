@@ -9,9 +9,11 @@ import { TodoService } from './todo.service';
 })
 export class TodoComponent implements OnInit {
   private todos;
-  private activeTasks;
   public newTodo;
   public isShown;
+  public startIndex = 0;
+  public endIndex = 10;
+  public numberOfPages;
 
   constructor(private todoService: TodoService) { }
 
@@ -22,7 +24,7 @@ export class TodoComponent implements OnInit {
   getTodos(){
     return this.todoService.get().then(todos => {
       this.todos = todos;
-      this.activeTasks = this.todos.filter(todo => !todo.isDone).length;
+      this.numberOfPages = this.todos.length;
     });
   }
 
@@ -47,6 +49,15 @@ export class TodoComponent implements OnInit {
       this.isShown = false;
       return this.getTodos();
     });
+  }
+
+  getArrayFromNumber(length) {
+    return new Array(length / 10);
+  }
+
+  updateIndex(pageIndex) {
+    this.startIndex = pageIndex * 10;
+    this.endIndex = this.startIndex + 10;
   }
 
   toggleShow(title) {
