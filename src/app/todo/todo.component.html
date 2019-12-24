@@ -10,14 +10,14 @@
                [(ngModel)]="newTodo"
                (keyup.enter)="addTodo()"
                autofocus>
-        <select class="todo-select" [(ngModel)]="selectNum">
-          <option value="10" (click)="quantity(selectNum)">10</option>
-          <option value="20" (click)="quantity(selectNum)">20</option>
-          <option value="30" (click)="quantity(selectNum)">30</option>
-        </select>
-        end{{endIndex}}s{{selectNum}}
-      </div>
 
+        <div class="todo-quantity-wrapper">
+          <p>Количество страниц: </p>
+          <button class="todo-quantity" [(ngModel)]="selectNum" (click)="quantity(10)" [class.selected]="selectNum === 10">10</button>
+          <button class="todo-quantity" [(ngModel)]="selectNum" (click)="quantity(20)" [class.selected]="selectNum === 20">20</button>
+          <button class="todo-quantity" [(ngModel)]="selectNum" (click)="quantity(30)" [class.selected]="selectNum === 30">30</button>
+        </div>
+      </div>
       <div class="card-preview-wrapper">
         <div class="card-preview" *ngFor="let todo of todos | slice:startIndex:endIndex">
           <img src="./../../assets/image.jpeg" alt="" width="100%">
@@ -37,7 +37,6 @@
                    (keyup.enter)="updateTodo(todo, updatedTodo.value)">
             <p (click)="updateTodo(todo, updatedTodo.value)">Изменить</p>
           </div>
-
         </div>
       </div>
         <div class="pagination">
@@ -46,7 +45,7 @@
              (click)="onSelect(page)">
             <a class="page-link" (click)="updateIndex(in)">{{in+1}}</a>
           </p>
-          <p class="page-item" (click)="updateIndexLast(in)">Last</p>
+          <p class="page-item" (click)="updateIndexLast()">Last</p>
         </div>
     </div>
   </div>

@@ -61,6 +61,7 @@ const TODOS = [
   { title: 'Task name 58'},
   { title: 'Task name 59'},
   { title: 'Task name 60'},
+  { title: 'Task name 61'},
 ];
 
 @Injectable({

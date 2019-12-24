@@ -31,7 +31,7 @@ export class TodoComponent implements OnInit {
   }
 
   addTodo() {
-    this.todoService.add({ title: this.newTodo, isDone: false }).then(() => {
+    this.todoService.add({ title: this.newTodo}).then(() => {
       return this.getTodos();
     }).then(() => {
       this.newTodo = ''; // clear input form value
@@ -54,12 +54,12 @@ export class TodoComponent implements OnInit {
   }
 
   getArrayFromNumber(length) {
-    return new Array(length / 10);
+    return new Array(Math.ceil(length / this.selectNum));
   }
 
   updateIndex(pageIndex) {
-    this.startIndex = pageIndex * 10;
-    this.endIndex = this.startIndex + 10;
+    this.startIndex = pageIndex * this.selectNum;
+    this.endIndex = this.startIndex + this.selectNum;
   }
 
   updateIndexFirst() {
@@ -68,7 +68,7 @@ export class TodoComponent implements OnInit {
   }
 
   updateIndexLast() {
-    this.startIndex = this.todos.length - 10;
+    this.startIndex = this.todos.length - this.selectNum;
     this.endIndex = this.todos.length;
   }
 
@@ -81,6 +81,8 @@ export class TodoComponent implements OnInit {
   }
 
   quantity(num) {
-    this.endIndex = 30;
+    this.startIndex = 0;
+    this.endIndex = num;
+    this.selectNum = num;
   }
 }
