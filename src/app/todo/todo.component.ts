@@ -10,16 +10,19 @@ import { TodoService } from './todo.service';
 export class TodoComponent implements OnInit {
   private todos;
   public newTodo;
-  public isShown;
-  public startIndex = 0;
-  public endIndex = 10;
-  public numberOfPages;
-  public selectNum = 10;
-  public selectedPage = 1;
+  public isShown: boolean;
+  public startIndex: number;
+  public endIndex: number;
+  public numberOfPages: number;
+  public selectNum: number;
+  public selectedPage: number = 1;
 
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
+    this.startIndex = 0;
+    this.endIndex = 10;
+    this.selectNum = 10;
     this.getTodos();
   }
 

@@ -13,9 +13,9 @@
 
         <div class="todo-quantity-wrapper">
           <p>Количество страниц: </p>
-          <button class="todo-quantity" [(ngModel)]="selectNum" (click)="quantity(10)" [class.selected]="selectNum === 10">10</button>
-          <button class="todo-quantity" [(ngModel)]="selectNum" (click)="quantity(20)" [class.selected]="selectNum === 20">20</button>
-          <button class="todo-quantity" [(ngModel)]="selectNum" (click)="quantity(30)" [class.selected]="selectNum === 30">30</button>
+          <button class="todo-quantity" [(ngModel)]="selectNum" ngDefaultControl (click)="quantity(10)" [class.selected]="selectNum === 10">10</button>
+          <button class="todo-quantity" [(ngModel)]="selectNum" ngDefaultControl (click)="quantity(20)" [class.selected]="selectNum === 20">20</button>
+          <button class="todo-quantity" [(ngModel)]="selectNum" ngDefaultControl (click)="quantity(30)" [class.selected]="selectNum === 30">30</button>
         </div>
       </div>
       <div class="card-preview-wrapper">
@@ -41,8 +41,7 @@
       </div>
         <div class="pagination">
           <p class="page-item" (click)="updateIndexFirst()">First</p>
-          <p class="page-item" *ngFor="let page of getArrayFromNumber(todos.length); let in = index" [class.selected]="page === selectedPage"
-             (click)="onSelect(page)">
+          <p class="page-item" *ngFor="let page of getArrayFromNumber(todos.length); let in = index" (click)="onSelect(page)">
             <a class="page-link" (click)="updateIndex(in)">{{in+1}}</a>
           </p>
           <p class="page-item" (click)="updateIndexLast()">Last</p>
