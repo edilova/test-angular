@@ -14,7 +14,11 @@
 .todo-content {
   margin: 1rem;
 }
-.card-wrapper {
+.todo-top {
+  display: flex;
+  justify-content: space-between;
+}
+.card-wrapper, .todo-select {
   width: 15rem;
   height: 2.5rem;
   color: #fff;
@@ -94,5 +98,9 @@
   p:last-child, p:first-child {
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+  .selected {
+    background-color: red;
+    color: green;
   }
 }

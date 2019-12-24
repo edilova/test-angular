@@ -14,6 +14,8 @@ export class TodoComponent implements OnInit {
   public startIndex = 0;
   public endIndex = 10;
   public numberOfPages;
+  public selectNum = 10;
+  public selectedPage = 1;
 
   constructor(private todoService: TodoService) { }
 
@@ -21,14 +23,14 @@ export class TodoComponent implements OnInit {
     this.getTodos();
   }
 
-  getTodos(){
+  getTodos() {
     return this.todoService.get().then(todos => {
       this.todos = todos;
       this.numberOfPages = this.todos.length;
     });
   }
 
-  addTodo(){
+  addTodo() {
     this.todoService.add({ title: this.newTodo, isDone: false }).then(() => {
       return this.getTodos();
     }).then(() => {
@@ -60,7 +62,25 @@ export class TodoComponent implements OnInit {
     this.endIndex = this.startIndex + 10;
   }
 
+  updateIndexFirst() {
+    this.startIndex = 0;
+    this.endIndex = 10;
+  }
+
+  updateIndexLast() {
+    this.startIndex = this.todos.length - 10;
+    this.endIndex = this.todos.length;
+  }
+
   toggleShow(title) {
     this.isShown = title;
+  }
+
+  onSelect(page): void {
+    this.selectedPage = page;
+  }
+
+  quantity(num) {
+    this.endIndex = 30;
   }
 }

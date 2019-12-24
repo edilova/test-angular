@@ -4,27 +4,28 @@
   </div>
   <div class="todo-content">
     <div class="">
-      <!--<button><span>+</span>Добавить карточку</button>-->
-      <input class="card-wrapper"
-             placeholder="Добавить карточку"
-             [(ngModel)]="newTodo"
-             (keyup.enter)="addTodo()"
-             autofocus>
+      <div class="todo-top">
+        <input class="card-wrapper"
+               placeholder="Добавить карточку"
+               [(ngModel)]="newTodo"
+               (keyup.enter)="addTodo()"
+               autofocus>
+        <select class="todo-select" [(ngModel)]="selectNum">
+          <option value="10" (click)="quantity(selectNum)">10</option>
+          <option value="20" (click)="quantity(selectNum)">20</option>
+          <option value="30" (click)="quantity(selectNum)">30</option>
+        </select>
+        end{{endIndex}}s{{selectNum}}
+      </div>
+
       <div class="card-preview-wrapper">
         <div class="card-preview" *ngFor="let todo of todos | slice:startIndex:endIndex">
           <img src="./../../assets/image.jpeg" alt="" width="100%">
           <div class="card-preview-text"  *ngIf="isShown !== todo.title">
             <p (click)="toggleShow(todo.title)">{{todo.title}}</p>
-            <!--<input class="edit"-->
-                   <!--#updatedTodo-->
-                   <!--[value]="todo.title"-->
-                   <!--(blur)="updateTodo(todo, updatedTodo.value)"-->
-                   <!--(keyup.escape)="todo.editing = false">-->
             <div class="card-buttons">
               <img src='./../../assets/edit.svg' alt="" (click)="toggleShow(todo.title)">
               <img src='./../../assets/delete.svg' alt="" (click)="destroyTodo(todo)">
-              <!--<button>Изменить</button>-->
-              <!--<button>Удалить</button>-->
             </div>
           </div>
           <div class="card-preview-text" *ngIf="isShown === todo.title">
@@ -35,29 +36,18 @@
                    (keyup.escape)="todo.editing = false"
                    (keyup.enter)="updateTodo(todo, updatedTodo.value)">
             <p (click)="updateTodo(todo, updatedTodo.value)">Изменить</p>
-            <!--<img src='./../../assets/edit.svg' alt="" (click)="updateTodo(todo, updatedTodo.value)" width="16">-->
           </div>
 
         </div>
       </div>
-<!--      <div>-->
         <div class="pagination">
-          <p class="page-item">Previous</p>
-          <p class="page-item" *ngFor="let i of getArrayFromNumber(todos.length); let in = index">
+          <p class="page-item" (click)="updateIndexFirst()">First</p>
+          <p class="page-item" *ngFor="let page of getArrayFromNumber(todos.length); let in = index" [class.selected]="page === selectedPage"
+             (click)="onSelect(page)">
             <a class="page-link" (click)="updateIndex(in)">{{in+1}}</a>
           </p>
-          <p class="page-item">Next</p>
+          <p class="page-item" (click)="updateIndexLast(in)">Last</p>
         </div>
-<!--      </div>-->
-<!--      <div>-->
-<!--        <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">-->
-<!--          Previous-->
-<!--        </button>-->
-<!--        {{currentPage+1}}/{{numberOfPages}}-->
-<!--        <button ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">-->
-<!--          Next-->
-<!--        </button>-->
-<!--      </div>-->
     </div>
   </div>
 </div>
